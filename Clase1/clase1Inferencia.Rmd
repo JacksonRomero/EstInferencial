@@ -1,0 +1,293 @@
+---
+title: "Estadística Inferencial" 
+author:   
+  - Jackson M'coy Romero Plasencia 
+institute:   
+  -  \large Universidad Nacional de San Cristóbal de Huamanga   
+  -  \normalsize Departamento Académico de Matemática y Física 
+date: Ayacucho 2020 
+output:   
+  beamer_presentation:  
+    incremental: false  
+    theme: "Marburg"  
+    colortheme: "default"
+    fonttheme: "structurebold"  
+    toc: true   
+    slide_level: 3
+    keep_tex: true
+header-includes: 
+- \usepackage{ragged2e}
+- \usepackage{color}
+- \usepackage{listings}
+- \AtBeginSubsection{}   
+
+---
+
+
+
+# Distribuciones de Probabilidad
+##
+
+## Distribuciones de Probabilidad en R
+
+\justifying El paquete stats de R (que se instala por defecto al instalar R, y se carga en memoria siempre que iniciamos sesión) implementa numerosas funciones para la realización de cálculos asociados a distintas distribuciones de probabilidad.
+
+
+
+Para obtener una lista completa de las distribuciones disponibles en R puede utilizar el siguiente comando: \color{blue} help("Distributions")
+
+## Argumentos en R
+\justifying Para cada distribución hay cuatro comandos. Los comandos para cada distribución están precedidos de una letra para indicar la funcionalidad:
+\begin{itemize}
+    \item  d: devuelve la función de densidad de probabilidad
+    \item  p: devuelve la función de densidad acumulada
+    \item q: devuelve la función de densidad acumulativa inversa (cuantiles)
+    \item  r: devuelve los números generados aleatoriamente
+ \end{itemize}
+
+## Distribuciones de Probabilidad Discretas
+
+## Distribucíon Binomal $Bin(n,p)$
+
+\justifying Es una distribución de probabilidad discreta; su función de cuantía o de masa de probabilidad está dada por:
+$$f_x{(x,n,p)}=f_x (x)=P(X=x)=\binom{n}{p}p^x (1-p)^{n-x} \quad x=\overline{0,n}$$
+Donde:
+\begin{itemize}
+    \item n: \mbox{número de ensayos independientes}
+    \item p y q: \mbox{probabilidad de éxitos y fracaso, p+q=1}
+    \item x: \mbox{número de éxitos en n ensayos}
+\end{itemize}
+
+##
+
+\justifying Suponga que hay doce preguntas de opción múltiple en un examen de matemáticas. Cada pregunta tiene cinco posibles respuestas, y sólo una de ellas es correcta. Encuentre la probabilidad de tener cuatro o menos respuestas correctas .$P(X\leq 4)=?$
+
+```{r}
+n=12
+p=1/5
+pbinom(4,size=n,prob=p)
+```
+
+```{r}
+n=12
+p=1/5
+round(dbinom(0:4,size=n,prob=p),3)
+round(sum(dbinom(0:4,size=n,prob=p)),3)
+```
+
+## Distribución Poisson $P(\lambda)$
+La función de cuantía o masa de probabilidad es:
+
+$$f_x(x,\lambda)=P(X=x)=\frac{e^{-\lambda\, }\lambda^x}{x!}\quad x=0,1,2,...$$
+Donde:
+\begin{itemize}
+    \item X: número de éxitos por unidades de tiempo, espacio, área, etc.
+    \item $\lambda$ número promedio de éxitos por unidades de tiempo, espacio, área, etc.
+\end{itemize}
+
+##
+   \justifying Si hay doce coches cruzando un puente por minuto en promedio, encuentre la probabilidad de tener diecisiete o más coches cruzando el puente en un minuto en particular.
+
+$$\begin{matrix}
+P(X\geq 17) & = & 1 -P(X< 17)\\ 
+ &  = &1 - P(X\leq  16) \\ 
+ &  = &1- P(16,12) \\ 
+ &  = & 0\mbox{.}101291
+\end{matrix}$$
+```{r}
+l=12
+1-ppois(16,lambda =l)
+```
+## Distrbución de Probabilidad Continua
+
+## Distribución Normal $N(\mu,\sigma)$
+\justifying
+La función de densidad de probabilidad de la distribución Normal es:
+
+$$f_X (x,\mu,\sigma)=\displaystyle\frac{1}{\sqrt{2\pi}\, \sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}} $$
+Donde:
+\begin{itemize}
+    \item $\mu$ es la media( mediana y moda)
+    \item $\sigma$ desviación estándar $\sigma>0$
+    \item El proceso para estandarizar la distribución Normal consiste en transformar la variable Normal  $N(\mu,\sigma)$  $N(0,1)$,es decir:
+    $$Z=\frac{X-\mu}{\sigma} $$
+\end{itemize}
+
+##
+
+\justifying En una ciudad se estima que la temperatura máxima en el mes de junio
+sigue una distribución normal, con media 23° y desviación típica 5°.
+Calcular el número de días del mes en los que se espera alcanzar
+máximas entre 21° y 27°.
+$$\begin{array}{rcl}
+P(21 \leq X \leq 27) & = &\displaystyle P\Big( \frac{21-23}{5} \leq \frac{X-\mu}{\sigma} \leq  \frac{27-23}{5}\Big)\\ 
+ &  = & \displaystyle P\Big( \frac{-2}{5} \leq Z \leq  \frac{4}{5}\Big) \\ 
+ &  = & \displaystyle P\Big(-0.4 \leq Z \leq  0.8\Big) \\ 
+ &  = & P(Z\leq 0.8)-P(Z\leq -0.4)
+\end{array}$$
+
+```{r}
+pnorm(0.8)-pnorm(-0.4)# Dist. Normal Estándar
+```
+```{r}
+pnorm(27,23,5)-pnorm(21,23,5)#Dist. Normal General
+```
+
+##
+```{r echo=FALSE,fig.height=7,fig.width=10}
+curve(dnorm(x,23,5),8,38,ylab='',xlab='',lwd=1.5,col='black')
+abline(v=23,col='black',lwd=3)
+polygon(c(21,seq(21,27,l=100),27),c(0,dnorm(seq(21,27,l=100),23,5),0),col='red',density = c(21, 27), angle = c(45))
+segments(23,0, 23,dnorm(23),col="red", lty=3, lwd=3 )
+text(23,dnorm(23,21,5),bquote(paste("",mu,"=",. (signif(23,3)))),pos=4,cex=0.85)
+```
+
+## Distribución Chi Cuadrado $\chi_{(n)}^{2}$
+
+\justifying Teorema: Sean $X_1,X_2,...,X_n$ variables aleatorias independientes e identicamente distribuídas segun la distribución normal.
+
+$$\sum_{i=1}^{n}\Bigg(\frac{X_i-\mu}{\sigma}\Bigg)^2 \longrightarrow \chi_{(n)}^{2} $$
+cuya función de densidad,
+$$f_X(x,n)=\displaystyle \frac{X^{n/2-1} \,\,e^{-x/2}}{2^{n/2}\,\,\Gamma(n/2)} $$
+
+$$\begin{array}{rcl}
+E(X) & = &n\\ 
+ &   & \\ 
+Var(X) &  = & 2n
+\end{array}$$
+
+## Distribución t- Student $t_{(n)}$
+
+\justifying Teorema: Sea $Z$ y $V$ variables aleatorias independientes distribuídas segun la distribución normal estándar y chi cuadrado en v grados de libertad, respectivamente. 
+
+$$t=\frac{Z}{\sqrt{V/v}} \longrightarrow t_{(v)} $$
+cuya función de densidad,
+$$f_T(t,v)=\displaystyle \frac{\Gamma{(v+1)/2}}{\sqrt{v\pi} \,\,\Gamma(v/2)}(1+t^2/v)^{-(v+1)/2} $$
+
+$$\begin{array}{rcl}
+E(T) & = &0\\ 
+ &   & \\ 
+Var(T) &  = &\displaystyle \frac{v}{v-2} 
+\end{array}$$
+
+
+## Distribución F- Snedecor $F_{(m,n)}$
+
+\justifying Teorema: Sea $X$ y $Y$ variables aleatorias independientes distribuídas segun la distribución Chi cuadrado con m y n  grados de libertad, respectivamente. 
+
+$$\frac{X/m}{Y/n} \longrightarrow F_{(m,n)} $$
+
+$$ E(F) =\displaystyle\frac{n}{n-2} $$
+
+# Introducción a la Inferencia Estadística
+## Definición: Muestra Aleatoria
+
+Una muestra aleatoria de tamaño $n$ de una variable aleatorio $X$ es un
+conjunto de $n$ - variables aleatorias $X_1,X_2,...,X_n$, tal que:
+
+\begin{itemize}
+  \item Todas $X_1,X_2,...,X_n \quad i=\overline{1,n}$ son independientes
+  \item $X_1,X_2,...,X_n$ tienen la misma distribución, es decir:
+        $$F_{X_i}(t)=F_{X}(t)\quad \forall \,\,i=\overline{1,n}$$
+        $$\quad \longrightarrow f_{X_1,X_2,...,X_n}(x_1,x_2,...,x_n)=\prod_{i=1}^{n} f_{X_i}(x_i) $$
+\end{itemize}
+
+
+
+## Por ejemplo:
+
+Sea $X$ una variable aleatorio con distribución normal, se elije una m.a de tamaño 2.
+
+$$\begin{array}{rcl}
+X_1: &  &E(X_1)=\mu \quad Var(X_1)=\sigma^2\\ 
+ &   & \\ 
+X_2: & &E(X_2)=\mu \quad Var(X_2)=\sigma^2\\ 
+\end{array}$$
+
+
+\justifying Sea $X$ una variable aleatorio con distribución binomial $Bin(10,0.2)$, se elije una m.a de tamaño 2.
+
+$$\begin{array}{rcl}
+X_1: &  &E(X_1)=2 \quad Var(X_1)=1.6\\ 
+ &   & \\ 
+X_2: & &E(X_2)=2 \quad Var(X_2)=1.6\\ 
+\end{array}$$
+
+
+##
+
+\justifying La vida útil( en miles de horas ) de una batería es una variable aleatoria $X$ con función de densidad: 
+
+$$f_X (x)=\left\{\begin{matrix}
+ 2-2x& 0\leq  x\leq 1\\ 
+ & \\ 
+ 0& e.o.c 
+\end{matrix}\right.
+$$
+
+En este caso, no hay información acerca de lo parámetros poblacionales( $E(X), Var(X)$). Debemos
+realizar el cálculo de dichos parámetros y luego ver las características de la muestra
+aleatoria
+
+Vamos a estimar los parámetros a partir de simulaciones con el método Monte Carlo.
+
+
+##
+Simulación de Monte Carlo para integrales
+
+```{r}
+ MC.simple.est <- function(g, a, b, n=1e5) {
+   xi <- runif(n,a,b)      # step 1
+   g.mean <- mean(g(xi))   # step 2
+   (b-a)*g.mean            # step 3
+ }
+```
+
+Simulación de Monte Carlo Valor Esperado
+
+```{r}
+ mediap<- function(g, a, b, n=1e5) {
+    xi <- runif(n,a,b)      # step 1
+    g.mean <- mean(g(xi)*xi)# step 2
+    (b-a)*g.mean            # step 3
+ }
+```
+
+
+##
+Simulación de Monte Carlo Varianza
+```{r}
+varp<-function(g, a, b, n=1e5) {
+    xi <- runif(n,a,b)     # step 1
+    g.mean <- mean(g(xi)*xi^2)-
+      (mean(g(xi)*xi))^2   # step 2
+    (b-a)*g.mean}          # step 3
+```
+```{r}
+ g <- function(x) 2-2*x
+ MC.simple.est(g, 0, 1)
+ mediap(g,0,1)
+ varp(g,0,1)
+```
+
+
+## Definión: Estadística o estimador
+
+Se denomina estadística a cualquier función de las variables aleatorias que constituyen la muestra.
+
+\justifying Una estadística es una variablea aleatoria $Y=H(X_1,X_2,...,X_n)$, cuyo valor es un número real $y=H(x_1,x_2,...,x_n)$
+
+Algunas estadísticas importantes sus valores calculados a partir de la muestra aleatoria:
+
+$$\overline{X}=\frac{1}{n} \sum_{i=1}^{n}X_i\,\,(\mbox{Variable aleatoria})\quad  \overline{x}=\frac{1}{n} \sum_{i=1}^{n}x_i\,\,(\mbox{valor})$$
+$$S^2=\frac{1}{n} \sum_{i=1}^{n}(X_i-\overline{X})^2\,\,(\mbox{con valor})\quad  s^2=\frac{1}{n} \sum_{i=1}^{n}(x_i-\overline{x})^2$$
+
+##
+
+$$\overline{X}=\frac{1}{n} \sum_{i=1}^{n}X_i \longrightarrow N(\mu, \displaystyle \frac{\sigma^2}{n} ) $$
+
+##
+
+$$P(|X-\mu|\leq 2\sigma)=0.9544$$
+$$P(|X-\mu|\leq \sigma)=0.68$$
+$$P(|X-\mu|\leq 3\sigma)=0.9544$$

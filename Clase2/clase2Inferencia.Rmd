@@ -1,0 +1,399 @@
+---
+title: "Estadística Inferencial" 
+author:   
+  - Jackson M'coy Romero Plasencia 
+institute:   
+  -  \large Universidad Nacional de San Cristóbal de Huamanga   
+  -  \normalsize Departamento Académico de Matemática y Física 
+date: Ayacucho 2020 
+output:   
+  beamer_presentation:  
+    incremental: false  
+    theme: "Marburg"  
+    colortheme: "default"
+    fonttheme: "structurebold"  
+    toc: true   
+    slide_level: 3
+    keep_tex: true
+header-includes: 
+- \usepackage{ragged2e}
+- \usepackage{color}
+- \usepackage{listings}
+- \usepackage{multicol}
+- \AtBeginSubsection{}   
+
+---
+
+
+# Retroalimentación
+
+
+## Definición: Muestra Aleatoria
+
+Una muestra aleatoria de tamaño $n$ de una variable aleatorio $X$ es un
+conjunto de $n$ - variables aleatorias $X_1,X_2,...,X_n$, tal que:
+
+\begin{itemize}
+  \item Todas $X_1,X_2,...,X_n \quad i=\overline{1,n}$ son independientes
+  \item $X_1,X_2,...,X_n$ tienen la misma distribución, es decir:
+        $$F_{X_i}(t)=F_{X}(t)\quad \forall \,\,i=\overline{1,n}$$
+        $$\quad \longrightarrow f_{X_1,X_2,...,X_n}(x_1,x_2,...,x_n)=\prod_{i=1}^{n} f_{X_i}(x_i) $$
+\end{itemize}
+
+
+##
+
+Ejercicio propuesto:
+
+Si $X$ es una variable aleatoria, con:
+$$f_X(x,p)=f_X (x)= p^x (1-p)^{1-x},\quad x=0,1 \quad 0<p<1$$
+y sea una muestra aleatoria de tamaño $n$ . Hállese la distribución.
+
+$$Y=\displaystyle \sum_{i=1}^{n}X_i$$
+
+Función Generatriz de Momentos: $M_X(t)$
+
+$$fgm(x)=M_X (t)=\mathbb{E}[e^{tx}] $$
+Primero se determinará la $M_X(t)$ en la población
+
+##
+$$f_X(x,p)=f_X (x)= p^x (1-p)^{1-x},\quad x=0,1 \quad 0<p<1$$
+$$\begin{matrix}
+M_X(t) & = & \mathbb{E}[e^{tx}] & = &\displaystyle\sum_{x=0}^{1} \,e^{tx} \,p^x \,(1-p)^{1-x} \\ 
+ &  &  &=  & \displaystyle\sum_{x=0}^{1} \,(pe^t)^{x} \,(1-p)^{1-x}\\
+ &  &  &=  &  ((1-p)+pe^t)
+\end{matrix}
+$$
+
+ \justifying Primera forma: Usando la Función de Generatriz de Momentos: $Y=\displaystyle \sum_{i=1}^{n}X_i$
+ 
+$$\begin{matrix}
+M_Y(t) & = & \mathbb{E}[e^{ty}] & = & \mathbb{E}[e^{t(X_1+X_2+...+X_n)}] \\  &  &  &=  & \mathbb{E}[e^{t(X_1)} \, e^{t(X_2)}...e^{t(X_n)}] \\
+ &  &  &=  & \mathbb{E}[e^{t(X_1)}] \, \mathbb{E}[e^{t(X_2)}]... \,\mathbb{E}[e^{t(X_n)}]\\
+ &  &  &=  &\big(\mathbb{E}[e^{t(X_i)}]\big)^n\\
+  &  &  &=  &\bigg((1-p)+pe^t\bigg)^n \longrightarrow Bin(n,p)
+\end{matrix}
+$$
+
+##
+Segunda forma:
+$$f_X(x,n,p)=f_X (x)= \binom{n}{p} p^x (1-p)^{1-x},\quad x=\overline{0,n} \quad 0<p<1$$
+Es la función de probabilidad de la Distribución Binomial.
+
+$$\mathbb{E}(X)=np \quad \mbox{y}\quad \mathbb{V}(X)=npq $$
+$$\begin{matrix}
+\mathbb{E}(Y) & = & \mathbb{E}(X_1+X_2+...+
+X_n) & = & \mathbb{E}(X_1)+...+\mathbb{E}(X_n)\\ 
+ &  &  &=  &\underbrace{p+p+...+p}_{n \,\,veces} =np\\
+\mathbb{V}(Y) & = & \mathbb{V}(X_1+X_2+...+
+X_n) & = & \mathbb{V}(X_1)+...+\mathbb{V}(X_n)\\ 
+ &  &  &=  &\underbrace{pq+pq+...+pq}_{n \,\,veces} =npq
+\end{matrix}
+$$
+
+# Distribución de la Media Muestral
+
+
+## Distribución de la Media Muestral
+
+\justifying Si $X_1,X_2,...,X_n$ es unas muestra aleatoria de una población infinita, con media $\mu$ y varianza $\sigma^2<\infty$, entonces:
+
+$$\mathbb{E}(\overline{X} )=\mu \quad\quad \mathbb{V}(\overline{X} )=\frac{\sigma^2}{n} $$
+Demostración:
+
+Como $\overline{X}=\displaystyle \sum_{i=1}^{n}\frac{X_i}{n}$, entonces:
+
+
+$$\mathbb{E}(\overline{X} )  = \mathbb{E}\bigg(\displaystyle\sum_{i=1}^{n}\frac{X_i}{n} \bigg )=\displaystyle \sum_{i=1}^{n}\frac{\mathbb{E} (X_i)}{n}= \displaystyle \sum_{i=1}^{n}\frac{\mu}{n}= \mu$$
+$$\mathbb{V}(\overline{X} )= \mathbb{V}\bigg(\displaystyle \sum_{i=1}^{n}\frac{X_i}{n} \bigg) = \displaystyle \sum_{i=1}^{n}\frac{\mathbb{V} (X_i)}{n^2}  = \displaystyle \sum_{i=1}^{n}\frac{\sigma^2}{n^2}=\displaystyle\frac{\sigma^2}{n}$$
+
+
+
+Por consiguiente: $\overline{X} \longrightarrow N(\mu, \displaystyle \frac{\sigma^2}{n})$
+
+##
+Ejemplo: 
+\justifying
+Una fábrica textil tiene 5 operarios. Los años de servicio en la fábrica de estos operarios son:
+$$3,4,7,9,12$$
+\begin{itemize}
+\justifying
+  \item [a.] Calcule la media y varianza de la población
+  \item [b.] Determine la distribución de la media de las muestras de tamaño 2 de la población(reposición)
+  \item [c.] Determine la distribución de la media de las muestras de tamaño 2 de la población(sin reposición)
+  
+\end{itemize}
+Solución:
+
+a. Media y varianza de la población
+
+$$\mathbb{E}(X)=\sum_{i=1}^{n} x_if(x_i) \quad\mbox{y} \quad \mathbb{V}(X)= \mathbb{E}(X^2)-(\mathbb{E}(X))^2$$
+
+$$\mathbb{E}(X)=\sum_{i=1}^{n} x_if(x_i)=3(1/5)+4(1/5)+...+12(1/5)=7$$
+
+## 
+$$\mathbb{E}(X^2)=\sum_{i=1}^{n} x_i^2f(x_i)=3^2(1/5)+4^2(1/5)+...+12^2(1/5)=59.8$$
+$\mathbb{V}(X)= \mathbb{E}(X^2)-(\mathbb{E}(X))^2=59.8-7^2=10.8$
+
+luego:
+$$\mathbb{E}(X)=\mu=7 \quad\quad \mbox{y} \quad\quad  \mathbb{V}(X)=\sigma^2=10.8 $$
+En R:
+```{r}
+pob<-c(3,4,7,9,12)
+mean(pob)
+var(pob) #varianza con denominador n-1
+var(pob)*4/5 #barianza con denomiador n
+
+```
+
+##
+b. Muestras de tamaño 2, con reposición
+
+\begin{multicols}{2}
+
+\begin{center}
+\begin{tabular}{ c c c c c}
+ 3,3 & 3,4 & 3,7 & 3,9 & 3,12\\ 
+ 4,3 & 4,4 & 4,7 & 4,9 & 4,12\\
+ 7,3 & 7,4 & 7,7 & 7,9 & 7,12\\
+ 9,3 & 9,4 & 9,7 & 9,9 & 9,12\\
+ 3,3 & 3,4 & 3,7 & 3,9 & 12,12
+\end{tabular}
+\end{center}
+
+\columnbreak
+
+\begin{center}
+\begin{tabular}{ c c c c c}
+  3.0 & 3.5 & 5.0 & 6.0 & 7.5\\ 
+ 3.5 & 4.0 & 5.5 & 6.5 & 8.0\\
+ 5.0 & 5.5 & 7.0 & 8.0 & 9.5\\ 
+ 6.0 & 6.5 & 8.0 & 9.0 & 10.5\\ 
+7.5  & 8.0 &9.5& 10.5 &12.0
+\end{tabular}
+\end{center}
+\end{multicols}
+
+$$\mathbb{E}(\overline{X})=\sum_{i=1}^{n} \overline{x}f(\overline{x}) \quad\mbox{y} \quad \mathbb{V}(\overline{X})= \mathbb{E}(\overline{X}^2)-(\mathbb{E}(\overline{X}))^2$$
+
+$$\mathbb{E}(\overline{X})=\sum_{i=1}^{n} \overline{x}f(\overline{x})=3(1/25)+3.5(2/25)+....+12(1/25)=7 $$
+
+##
+
+$$\mathbb{E}(\overline{X}^2)=\sum_{i=1}^{n} \overline{x}^2f(\overline{x})=3^2(1/25)+....+12^2(1/25)=\frac{1360}{25} $$
+
+$$\mathbb{V}(\overline{X})= \mathbb{E}(\overline{X}^2)-(\mathbb{E}(\overline{X}))^2=\frac{1360}{25}-7^2 =5.4$$
+Se debe tener en cuenta, que:
+$\displaystyle \mathbb{V}(\overline{X})=\sigma_{\overline{x}}^{2}=\frac{\sigma^2}{n}=\frac{10.8}{2}=5.4$
+
+En R:
+```{r}
+pob<-c(3,4,7,9,12)
+a<-sapply(1:1e4,function(x){mean(sample(pob,2,T))})
+mean(a)
+var(a)
+
+```
+
+##
+
+c. Muestras de tamaño 2, sin reposición
+
+\begin{multicols}{2}
+
+\begin{center}
+\begin{tabular}{ c c c c }
+  3,4 & 3,7 & 3,9 & 3,12\\ 
+ 4,3  & 4,7 & 4,9 & 4,12\\
+ 7,3 & 7,4   & 7,9 & 7,12\\
+ 9,3 & 9,4 & 9,7   & 9,12\\
+ 3,3 & 3,4 & 3,7 & 3,9
+\end{tabular}
+\end{center}
+
+\columnbreak
+
+\begin{center}
+\begin{tabular}{ c c c c}
+    3.5 & 5.0 & 6.0 & 7.5\\ 
+ 3.5   & 5.5 & 6.5 & 8.0\\
+ 5.0 & 5.5   & 8.0 & 9.5\\ 
+ 6.0 & 6.5 & 8.0   & 10.5\\ 
+7.5  & 8.0 &9.5& 10.5 
+\end{tabular}
+\end{center}
+\end{multicols}
+
+$$\mathbb{E}(\overline{X})=\sum_{i=1}^{n} \overline{x}f(\overline{x}) \quad\mbox{y} \quad \mathbb{V}(\overline{X})= \mathbb{E}(\overline{X}^2)-(\mathbb{E}(\overline{X}))^2$$
+
+$$\mathbb{E}(\overline{X})=\sum_{i=1}^{n} \overline{x}f(\overline{x})=3.5(2/20)+5(2/20)+....+10.5(2/20)=7 $$
+
+##
+
+$$\mathbb{E}(\overline{X}^2)=\sum_{i=1}^{n} \overline{x}^2f(\overline{x})=3.5^2(2/20)+....+10.5^2(2/20)=\frac{1061}{20} $$
+
+$$\mathbb{V}(\overline{X})= \mathbb{E}(\overline{X}^2)-(\mathbb{E}(\overline{X}))^2=\frac{1061}{20}-7^2 =4.05$$
+Se debe tener en cuenta, que:
+$\displaystyle \mathbb{V}(\overline{X})=\sigma_{\overline{x}}^{2}=\frac{\sigma^2}{n}\Bigg(\frac{N-n}{N-1}\Bigg) =\frac{10.8}{2}\Bigg(\frac{5-2}{5-1}\Bigg)=4.05$
+
+En R:
+```{r}
+pob<-c(3,4,7,9,12)
+a<-replicate(1e5, mean(sample(pob,2,F)) )
+mean(a)
+var(a)
+
+```
+
+## Notas
+
+\begin{enumerate}
+\justifying
+
+  \item La aproximación de $\overline{X}$ a la distribución normal$(N(\mu, \sigma^2/n))$ es buena, si $n\geq 30$, sin importa si la distribución en discreta o continua.
+  \item Si la muestra aleatoria es escogida de una población normal $N(\mu, \sigma^2)$, entonces, la distribución de $\overline{X}$ es exactamente normal $N(\mu, \sigma^2/n)$, para cualquier tamaño de muestra $n \geq 2$
+  \item Si el muestro es sin reeemplazo en una población finita de tamaño N, entonces, la varianza de la media muestral es:
+    $$ \displaystyle \mathbb{V}(\overline{X})=\sigma_{\overline{x}}^{2}=\frac{\sigma^2}{n}\Bigg(\frac{N-n}{N-1}\Bigg)$$
+  El coeficiente $\Bigg(\frac{N-n}{N-1}\Bigg)$ se denomina factor de correción para población finita
+  \item La desviación estándar de una estadística es conocidad como error típico o error estándar
+\end{enumerate}
+
+
+## 
+\justifying
+Ejemplo: El número de automóviles por familia es una variable aleatoria $X$ cuya distribución de probabilidad es como sigue:
+
+\begin{center}
+\begin{tabular}{ |c |c |c |c |c| c|}
+\hline
+ $x$  & 0 & 1 & 2 &3 & 4\\ \hline
+$f_X(x)$ & 4/12  & 4/12 & 2/12 & 1/11& 1/12 \\ \hline
+
+ \end{tabular}
+\end{center}
+
+\begin{itemize}\justifying
+  \item  Halle la media y la varianza de la población del número de automóviles por familia.Si se escoge una muestra de 49 familias. ¿Cuál es la probabilidad de que la media muestral de autos por familia esté entre 1 y 2?
+\end{itemize}
+En R:
+
+```{r}
+#a.
+poba<-c(0,0,0,0,1,1,1,1,2,2,3,4)
+mean(poba)
+var(poba)*(48/49)
+```
+
+## 
+```{r}
+#b.
+poba<-c(0,0,0,0,1,1,1,1,2,2,3,4)
+mues<-sapply(1:1e4, function(x) {
+mean(sample(poba,49,T))} )
+mean(mues)
+var(mues)
+```
+
+
+# Teorema Central del Límite
+
+## Desigualdad de Chebyshev
+
+\justifying
+Sea $X$ una variablea aleatoria, con media $\mathbb{E}(X)=\mu$ y varianza $\mathbb{V}(X)=\sigma^2$, entonces:
+
+$$\forall \, e>0,\displaystyle  P(|X-\mu|\geq e)\leq \frac{\sigma^2}{e^2}$$ 
+
+```{r echo=FALSE}
+curve(dnorm(x,0,1),-4,4, col='black', lwd=2, xlab='', ylab='')
+x<-seq(c(qnorm(0.975)),4,l=100)
+polygon(c(1.96,x,4), c(0,dnorm(x),0), density = 20, angle = 45,col='blue')
+x1<-seq(-4,c(qnorm(0.025)),l=100)
+polygon(c(-4,x1,-1.96), c(0,dnorm(x1),0), density = 20, angle = 45,col='blue')
+text(2.2, 0.08,expression(paste(u+e)), cex = 1.2)
+text(-2.2, 0.08,expression(paste(u+e)), cex = 1.2)
+grid(15)
+```
+
+
+## Otras formas de la desigualdad de  Chebyshev
+\begin{itemize}
+
+\item $\forall \, e>0,\displaystyle  P(|X-\mathbb{E}(X) |\geq e)\leq \frac{\mathbb{V}(X) }{e^2}$
+\item $\forall \, k\geq 1,\displaystyle  P(|X-\mu|\geq k\,\sigma)\leq \frac{1}{k^2}$
+\end{itemize}
+
+Ejemplo: Sea $X$ una variable aleatorio con distribución normal estándar $N(0,1)$. Hallar el valor de: $P(-2\leq X \leq 2)$ 
+
+```{r echo=FALSE,out.width = '40%',fig.align = "center"}
+x1<-seq(-4,4,l=200);a<-dnorm(x1)
+plot(x1,dnorm(x1), col='black', lwd=2, xlab='', ylab='', type='l', axes = F)
+axis(1, lwd=2, col='black');x<-seq(-2,2,l=100)
+polygon(c(-2,x,2), c(0,dnorm(x),0), density = 20, angle = 45,col='blue')
+grid(15)
+```
+
+```{r}
+pnorm(2)-pnorm(-2)
+```
+
+
+## Ley de los grandes números
+
+\justifying Sea $\{X_n\}_{n\in N}$ una sucesión de variables aleatorias independientes e indénticamente distribuídas con media $\mu < \infty$. Entonces:
+$$\displaystyle \frac{1}{n} \sum_{i=1}^{n}X_i  \xrightarrow[n\rightarrow{}\infty]\,{\mu}$$
+en donde la convergencia se cumple en el sentido casi seguro(ley fuerte) y también en probabilidad (ley débil)
+Seam $X1_,X_2,...$ v.a con distribución de $Bernoulli(p=0.5)$
+```{r echo=FALSE,out.width = '50%',fig.align="center"}
+set.seed(1)
+nsim <- 1000
+p <- 0.5
+x <- rbinom(nsim, size = 1, prob = p) 
+n <- 1:nsim
+plot(n, cumsum(x)/n, type="l", ylab="", 
+     xlab="Número de lanzamientos", ylim=c(0,1),lwd=2)
+abline(h=p, lty=2, col="red",lwd=2)
+
+```
+## Convergencia en Probabilidad y Casi segura
+
+\justifying Sean $X_1,X_2,...$ variablea aleatorias y sea $X$ una variable aleatoria.
+
+\begin{itemize}
+  \item Ley Débil de Khintchin: Convergencia en probabilidad
+      $$X_n \,\text{converge a}\, X \,\text{en probabilidad, si para todo}\, \epsilon>0 $$
+      $$P(|X_n -X|\geq \epsilon)\longrightarrow 0 \quad\text{cuando}\quad n\to\infty $$
+      $$\displaystyle X_n  \overset{p}\longrightarrow X$$
+  \item Ley fuerte de Kolmogorov: convergenvia casi segura 
+  
+       $$X_n \,\text{converge a}\, X \,\text{casi seguramente , si}\,P(X_n \longrightarrow X)$$   
+       $$\quad\text{cuando}\quad n\to\infty,\text{es decir, el evento:}\, A=\{\omega:X_n(\omega)$$ $$\longrightarrow X(\omega)\}\, \text{tiene probabilidad 1} $$
+\end{itemize}
+
+## 
+\justifying Ejemplo: Ley fuerte de los GN:Lanzamientos de una moneda: Las v.a. $X_n=Sn/n$ forman un sucesión de valores números del resultado de los lanzamiento, entonces $X_n(\omega)=(1/n)*$(el número de resultados posibles).
+luego:
+$$X_n \longrightarrow 1/2$$
+\justifying Ejemplo: Ley débil de los GN:
+luego:
+
+$$S_n=\sum_{i=1}^{n}\frac{X_i}{n}, \,\,\text{entonces} $$
+
+$$\mathbb{E} (S_n)=\mu \quad\mathbb{V}  (S_n)=\frac{\sigma^2}{n} $$
+Usando la desigualdad de chebyshev:
+$$P(\bigg|\frac{1}{n}\sum_{i=1}^{n}X_i-\mu \bigg|>\epsilon)\leq \frac{\sigma^2}{n\,\epsilon^2}\longrightarrow 0 $$
+
+
+## Teorema Central del Límite
+
+\justifying Convergencia en Distribución: Sea $X_1,X_2,...$ variables aleatorias y sean $F$ y $F_n$ las funciones de Distribución de $X$ y $X_n$, respectivamente. Decimos que $X_n$ converge a $X$ en Distribución, y escribimos:
+
+  $$\displaystyle X_n  \overset{\mathcal{D}}\longrightarrow X$$
+si,
+  $$\displaystyle F_n(x)  \longrightarrow F(x)$$
+
+Si $X_1,X_2,...,X_n$ contituye una m.a. de tamaño $n$ de una población infinita que tiene media $\mathbb{E}(X)=\mu$ y varianza $\mathbb{V}(X)=\sigma^2$, entonces:
+
+  $$\displaystyle Z=\frac{\overline{X}-\mu }{\sigma/\sqrt{n} }  \overset{\mathcal{D}}\longrightarrow N(0,1)$$
+
+
