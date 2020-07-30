@@ -1,0 +1,141 @@
+---
+title: "Estadística Inferencial" 
+author:   
+  - Jackson M'coy Romero Plasencia 
+institute:   
+  -  \large Universidad Nacional de San Cristóbal de Huamanga   
+  -  \normalsize Departamento Académico de Matemática y Física 
+date: Ayacucho 2020 
+output:   
+  beamer_presentation:  
+    incremental: false  
+    theme: "Marburg"  
+    colortheme: "default"
+    fonttheme: "structurebold"  
+    toc: true   
+    slide_level: 3
+    keep_tex: true
+header-includes: 
+- \usepackage{ragged2e}
+- \usepackage{color}
+- \usepackage{listings}
+- \usepackage{multicol}
+- \usepackage{amsmath}
+- \usepackage[makeroom]{cancel}
+- \AtBeginSubsection{}   
+
+---
+
+
+## Muestreo en poblaciones normales
+\justifying
+Teorema: Sea $X \sim N(\mu,\sigma^2)$ y sea $X_1,X_2,...,X_n$ una muestra aleatoria de tamaño $n$, entonces: $\overline{X} \sim N(\mu,\sigma^2/n)$
+$$\text{Sea }\, \overline{X}=f(X_1,X_2,...,X_n)= \frac{1}{n}\sum_{i=1}^{n}X_i\quad \text{como}\, X_i\, \text{son v.a iid}\, \forall_i $$
+$$\text{Como }\, \overline{X} \text{ es combinación lineal de v.a. normales} \longrightarrow \text{es normal}$$
+$\overline{X} \sim N(\mu,\sigma^2/n)$
+
+## Distribuciones derivadas de la distribución normal
+\justifying
+\textcolor{blue}{\textbf{Teorema:}} La suma de los cuadradros de v.a. $N(0,1)$ se distribuye como una $\chi_{(k)}^{2}$
+
+$$\begin{matrix}\justifying
+Z_i & \longrightarrow & N(0,1) & i=\overline{1,k} \\ 
+ &  &  & \\ 
+\displaystyle \sum_{i=1}^{k} Z_{i}^{2} & \longrightarrow &\chi_{(k)}^{2}  & 
+\end{matrix}$$
+
+$$\begin{matrix}
+X_i & \longrightarrow & N(\mu,\sigma^2) & i=\overline{1,k} \\ 
+ &  &  & \\ 
+\displaystyle \sum_{i=1}^{k}\bigg(\frac{X_i-\mu}{\sigma}\bigg)^{2} & \longrightarrow &\chi_{(k)}^{2}  & 
+\end{matrix}$$
+
+## Distribución de la Varianza Muestral
+\justifying
+Sea una muestra aleatoria $X_1,X_2,...,X_n$ con  $\overline{X}=\displaystyle \frac{1}{n}\sum_{i=1}^{n}X_i$ y 
+$s^2=\displaystyle \bigg(\frac{1}{n-1}\bigg)\, \sum_{i=1}^{n}(X_i-\overline{X})^2$
+
+\begin{align*}
+(n-1)s^2& = \displaystyle \sum_{i=1}^{n}(X_i-\overline{X})^2\\
+&=   \displaystyle \sum_{i=1}^{n}[X_i +\mu-\mu-\overline{X}] ^2 \\ 
+ & = \displaystyle \sum_{i=1}^{n}[(X_i-\mu)-(\overline{X}-\mu)]^2  \\ 
+ &= \displaystyle \sum_{i=1}^{n}(X_i-u)^2-2\displaystyle \sum_{i=1}^{n}(X_i-\mu)(\overline{X}-\mu)+\displaystyle \sum_{i=1}^{n}(\overline{X}-\mu)^2  & &
+\end{align*}
+
+##
+
+\begin{align*}
+(n-1)s^2 &= \displaystyle \sum_{i=1}^{n}(X_i-\mu)^2-2\displaystyle \underbrace{\sum_{i=1}^{n}(X_i-\mu)(\overline{X}-\mu)}_{n(\overline{X}-\mu)^2} +\displaystyle \sum_{i=1}^{n}(\overline{X}-\mu)^2\\
+(n-1)s^2 &=\displaystyle \sum_{i=1}^{n}(X_i-\mu)^2- n(\overline{X}-\mu)^2\\
+\bigg(\frac{n-1}{\sigma^2}\bigg) s^2 &=\displaystyle \sum_{i=1}^{n}
+\bigg(\frac{X_i-\mu}{\sigma}\bigg)^2- \bigg(\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}\bigg)^2\\
+\downarrow\quad\quad&\quad\quad\quad\quad\downarrow\quad\quad\quad\quad\quad \downarrow\\
+\chi_{(n-1)}^{2}&\quad\quad\quad\chi_{(n)}^{2}\quad\quad\quad\quad \chi_{(1)}^{2}
+\end{align*}
+
+$$\frac{(n-1)}{\sigma^2}s^2 \longrightarrow \chi_{(n-1)}^{2}$$ 
+
+## Media y Varianza de la Varianza muestral
+
+
+Cuasivarianza $n\geq 30$
+\begin{align*}
+    \mathbb{E}(s^2)&=\mathbb{E}\Bigg(\displaystyle\frac{\sigma^2 \,\chi_{(n-1)}^{2} }{n-1}   \Bigg)=\sigma^2  \\ 
+     &   \\ 
+    \mathbb{V}(s^2)&=\mathbb{V}\Bigg(\displaystyle\frac{\sigma^2 \,\chi_{(n-1)}^{2} }{n-1}   \Bigg)=2\sigma^4/(n-1)
+\end{align*}
+Varianza $n<30$
+\begin{align*}
+      \mathbb{E}(s^2)&=\mathbb{E}\Bigg(\displaystyle\frac{\sigma^2 \,\chi_{(n-1)}^{2} }{n}\Bigg)=\bigg(\frac{n-1}{n}\bigg)\sigma^2  \\ 
+    &  \\ 
+\mathbb{V}(s^2)&=\mathbb{V}\Bigg(\displaystyle\frac{\sigma^2 \,\chi_{(n-1)}^{2} }{n}   \Bigg)=\bigg(\frac{2(n-1)}{n^2}\bigg)\sigma^4
+\end{align*}
+
+## Distribución t- student
+\justifying
+\textcolor{blue}{\textbf{Teorema:}} Si $Y$ y $Z$ son variables aleatorias, tal que: $Y\longrightarrow \chi_{(k)}^{2}$ y $Z \longrightarrow N(0,1)$, entonces la distribución de:
+
+$$t=\displaystyle\frac{Z}{\sqrt{Y/K}}\quad \text{está dada} $$ 
+$$f_T(t)=\displaystyle\frac{\Gamma((k+1)/2)}{\sqrt{k\pi}\,\,\Gamma(k/2)}\bigg(1+\displaystyle\frac{t^2}{k}\bigg)^{-(k+1)/2} $$
+se llama distribución t-student con k grados de libertad.
+$$\mathbb{E}(t)=0\quad\quad \mathbb{V}(t)=\frac{k}{k-2}  $$
+
+## 
+\justifying
+\textcolor{blue}{\textbf{Teorema:}} Si $\overline{X}$ y $s^2$ son la media y la varianza de una muestra aleatoria de tamaño $n$ de una población normal con media $\mu$ y varianza $\sigma^2$, entonces:
+$$t=\displaystyle \frac{\overline{X}-\mu}{s/\sqrt{n}}\longrightarrow t_{(n-1)} $$
+\begin{align*}
+t&=\displaystyle\frac{Z}{\sqrt{Y/K}}=\displaystyle\frac{\frac{\overline{X}-\mu}{\sigma/\sqrt{n}} }{\sqrt{\frac{(n-1)s^2}{\sigma^2}/(n-1)}}=\displaystyle\frac{\frac{\overline{X}-\mu}{\cancel{\sigma} /\sqrt{n}} }{\sqrt{\frac{\cancel{(n-1)}s^2}{\cancel{\sigma^2}} /\cancel{(n-1)}}}
+\end{align*}
+\begin{align*}
+t&=\displaystyle \frac{\overline{X}-\mu}{s/\sqrt{n}}\longrightarrow t_{(n-1)}
+\end{align*}
+La población debe ser normal, la varianza desconocida y $n<30$
+
+
+## Distribuciones Muestrales en Poblaciones no Normales
+\justifying
+\textcolor{blue}{\textbf{Definición:}} Definamos una variable aleatoria $X$ con 2 posibles valores
+identificados con 0 y 1, con probabilidades asociadas $1-p$ y $p$ respectivamente.
+$$f_X(x,p)=f_X(x)=p^x\,(1-p)^{1-x} \quad\quad x=0,1$$
+Sea $X_1,X_2,...,X_n$ una muestra aleatoria tomada de esta población
+
+\begin{align*}
+f_{X_1,...,X_n}(x_1,...,x_n) &=\displaystyle\prod_{i=1}^{n}f_{X_i}(x_i)\\ 
+&= \displaystyle p^{\sum{X_i}} \,(1-p)^{n-\sum{X_i}}
+\end{align*}
+Los $X_i$ son 1 o 0, entonces: 
+$$\sum{X_i}=\text{número de éxitos en n ensayos} $$
+
+##
+\justifying
+Denominemos: $S=\displaystyle\sum_{i=1}^{n}X_i$, entonces la distribución de $S$ depende de $n$ y $p$
+$$S \longrightarrow Bin(n,p)$$
+Para $n$ suficentemente grande: 
+$$\hat{p}=\displaystyle\sum_{i=1}^{n}\frac{X_i}{n}$$
+
+$$\hat{p}\longrightarrow N\bigg(p,\frac{p(1-p)}{n}\bigg) $$
+
+
+
+

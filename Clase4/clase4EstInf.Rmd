@@ -1,0 +1,73 @@
+---
+title: "Clase4 Inferencia Estadística"
+author: "Jackson Romero"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Se estima que el 40% de los votos de los electores de la ciudad favorecen al candidato Sr. Diáz.
+\begin{itemize}
+  \item[a.] Si se selecciona una muestra aleatoria de 600 electores de la ciudad,¿qué probabilidad hay de que la porporción muestral de votos a favor  del Sr. Díaz esté entre 37\% y 45\%?
+\end{itemize}
+  $$P(0.37<\hat{p}<0.45|p=0.40)$$.
+  
+$$P\bigg(\frac{0.37-0.40}{\sqrt{0.4(0.60)/600}}<\frac{\hat{p}-p}{\sqrt{pq/n}} <\frac{0.45-0.40}{\sqrt{0.4(0.60)/600}} \bigg)$$
+$$P\bigg(-1.5<Z <2.5 \bigg)$$
+
+```{r}
+pnorm(2.5)-pnorm(-1.5)
+```
+  
+ \begin{itemize} 
+   \item[b.] ¿Qué tamaño de muestra se debería escoger si se quiere tener una probabilidad igual a 0.97 de que la proporción de votos a favor del Sr. Díaz en la muestra no se diferencie de su proporción estimada en más del 2\%? 
+\end{itemize}
+$$P(|\hat{p}-p|<0.02|p=0.40)$$.
+\begin{align*}
+P(|\hat{p}-p|<0.02|p=0.40)&=P\bigg(\bigg|\frac{\hat{p-p}}{\sqrt{p(1-p)/n}}\bigg|<\frac{0.02}{\sqrt{0.40(1-0.40)/n}} \bigg)\\
+&=2P(Z<0.04\sqrt{n})-1=0.97\\
+&=P(z<0.04\sqrt{n})=0.985\\
+\end{align*}
+
+
+```{r}
+n=(qnorm(0.985)/0.04)^2
+n
+```
+## Un fabricante afirma que a los más el 2\% de todas las piezas producidas son defectuosas. Al paracer esta información es exagerada, por lo que se selecciona una muestra aleatoria de 400 de tales piezas. Si la proporción muestral de defectuosos   es mayor que 3% se rechaza la afirmación, en caso contrario se acepta la afirmación.
+
+\begin{itemize}
+  \item [a.]¿Cuál es la probabilidad de rechazar la afirmación cuando realmente el 2\% de todas las piezas producidas son defectuosas?
+\end{itemize}
+
+$$P(\hat{p} >0.03|p=0.02)$$
+\begin{align*}
+P(\hat{p} >0.03|p=0.02)&=P'\bigg(\frac{\hat{p}-p}{\sqrt{pq/n}} >\frac{0.03-0.02}{\sqrt{0.02(1-0.02)/400}}\bigg)\\
+&=P(Z>1.43)=1-P(Z<1.43)
+\end{align*}
+
+
+```{r}
+1-pnorm(1.43)
+```
+
+
+\begin{itemize}
+  \item[b.] ¿Cuál  es la probabilidad de acepta la afirmación cuando realmente el 4\% de todas las piezas producidas son defectuosas?
+ \end{itemize} 
+  
+  $$P(\hat{p} <0.03|p=0.04)$$
+\begin{align*}
+P(\hat{p} <0.03|p=0.04)&=P'\bigg(\frac{\hat{p}-p}{\sqrt{pq/n}} >\frac{0.03-0.04}{\sqrt{0.04(1-0.04)/400}}\bigg)\\
+&=P(Z<-1.02)
+\end{align*}
+
+
+
+
+```{r}
+pnorm(-1.02)
+```
+
