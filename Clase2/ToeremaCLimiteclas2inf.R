@@ -82,3 +82,6 @@ text(media+desviacion,dnorm(media+desviacion,media,desviacion),bquote(paste("E.T
 
 teoremaCentral(10,1000, )
 
+round(7.2/(10)^0.5,1)
+
+
