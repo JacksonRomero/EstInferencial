@@ -23,10 +23,141 @@ header-includes:
 - \AtBeginSubsection{}   
 ---
 
-\begin{align*}
-  \item 0&=1&=2&=3&=4\\
-  \item 4/12&=4/12&=2/12&=1/12&=1/12\\
-\end{align*}
+$$\begin{matrix}
+ x&  =& 0\quad\quad 1\quad\quad 2\quad\quad 3\quad\quad 4 \\ 
+ f_X(x)&=&4/12\quad 4/12\quad 2/12\quad 1/12\quad 1/12 \\ 
+ &  & 
+\end{matrix}
+$$
+
+```{r}
+x<-0:4
+fx<-c(4/12,4/12,2/12,1/12,4/12)
+media<-x*fx
+```
+
+
+
+$$\mathbb{E}(X^2)=0+4/12+8/12+9/12+16/12=37/12$$
+
+
+$$\mathbb{E}(X)=0+4/12+4/12+3/12+4/12=15/12$$
+
+
+
+
+$$Z=\displaystyle \frac{\overline{X}-\mu}{\sigma/\sqrt{n} } $$
+
+```{r}
+mepob<-6
+varpob<-36
+n=9
+curve(dnorm(x,mepob,sqrt(varpob/n)),-2,14,lwd=2, col='red',
+      xlab='',ylab='',axes=F )
+axis(1,lwd=2)
+abline(v=mepob, lty=2)
+x2<-seq(2,14,l=100)
+polygon(c(2,x2,14),c(0,dnorm(x2,mepob,sqrt(varpob/n)),0),col='blue', density = 20, angle=45)
+text(6,0.08,0.985)
+
+```
+
+```{r}
+k=qnorm(0.015,6,2)
+k
+```
+
+$$P(\overline{X}>c)=0.985$$
+$$1- P(\overline{X}\leq c)=0.985$$
+$$P(\overline{X}\leq c)=0.015$$
+$$P\bigg(\displaystyle \frac{\overline{X}-\mu}{\sigma/\sqrt{n}} \leq \displaystyle \frac{c-6}{6/\sqrt(3)}\bigg)=0.015$$
+$$P\bigg(Z \leq \displaystyle \frac{c-6}{6/3}\bigg)=0.015$$
+```{r}
+qnorm(0.015)
+```
+
+$$P(Z<-2.17)=0.015$$
+$$\frac{c-6}{2}=-2.17 $$
+```{r}
+k=2*(-2.17)+6
+k
+```
+poblacion tiene distribución de Poisson
+n=10
+
+$$X\longrightarrow P(\lambda)$$
+$$\mathbb{E}(X)=\mathbb{V}(X)=\lambda $$
+$$\displaystyle \frac{e^{-\lambda}\,x^\lambda}{x!}\quad x=0,1,... $$
+$$Z=\displaystyle\frac{\overline{X}-\mu }{\sigma/\sqrt{n}} $$
+$$Z=\displaystyle\frac{\overline{X}-\lambda }{\sqrt\lambda{} /\sqrt{n}} $$
+
+
+$$X\longrightarrow Bin(n,p)$$
+
+$$\mathbb{E}(X)=np \quad\mathbb{V}(X)=np(1-p)$$
+
+$$Z=\displaystyle\frac{\overline{X}-\mu }{\sigma/\sqrt{n}} $$
+
+$$Z=\displaystyle\frac{\overline{X}-np }{\sqrt{np(1-p)} /\sqrt{n}} $$
+
+X tenga distribución de probabilidad exponencial(1/2)
+
+$$\mathbb{E}(X)=2 \quad \mathbb{V}(X)=4 $$
+
+
+$$Z=\displaystyle\frac{\overline{X}-2 }{\sqrt{4} /\sqrt{n}} $$
+
+
+
+
+X tenga distribución de probabilidad Gamma(alfa, beta)
+
+$$\mathbb{E}(X)=\alpha\beta \quad \mathbb{V}(X)=\alpha\beta^2 $$
+
+
+$$Z=\displaystyle\frac{\overline{X}-\alpha\beta }{\sqrt{\alpha\beta^2} /\sqrt{n}} $$
+
+$$Z=\displaystyle\frac{\overline{X}-p }{\sqrt{p(1-p)} /\sqrt{n}} $$
+
+Y=3X-5
+
+$$\mathbb{E}(Y)=\mathbb{E}(3X-5)$$
+$$\mathbb{E}(Y)=3\mathbb{E}(X)-5$$
+$$\overline{Y}=3\overline{X} -5$$
+$$P(\overline{Y}>28)=P(3\overline{X} -5>28)$$
+$$P(\overline{Y}>28)=P(\overline{X}>11)$$
+xbar tiene distribución norma $N(6,4)$
+```{r}
+xbar<-rnorm(1e5,6,2)
+sum(xbar>11)/1e5
+```
+
+$$P(\overline{X}> 11)=1-P(X\leq 11) $$
+
+$$1-P\bigg(\displaystyle \frac{\overline{X}-\mu}{\sigma/\sqrt{n}} \leq \displaystyle \frac{11-6}{2}\bigg)=1-P(Z\leq 2.5) $$
+
+
+
+```{r}
+1-pnorm(2.5)
+round(1-pnorm(2.5),4)
+```
+
+
+# Ejercicio 8
+###Simulación montecarlo
+
+```{r}
+f<-function(x){
+  f1<-ifelse(x>=0 & x<=1,2-2*x,0)
+  return(f1)}
+x<-seq(-1,2,l=100)  
+plot(x,f(x), lwd=2,type='l', col='red')  
+```
+
+
+
+
 
 
 
