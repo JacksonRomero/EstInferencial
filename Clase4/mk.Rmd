@@ -1,0 +1,45 @@
+---
+title: "Primer Examen Parcial"
+author: "Chespirito"
+date: "22/8/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Se  que el 40% de los votos de los electores de la ciudad favorecen al candidato Sr. Díaz
+
+\begin{itemize}
+
+ \item [a] hola 
+ \item [b] hi
+\end{itemize}
+$$\hat{p}\longrightarrow N(p,p(1-p)/n) $$
+
+```{r echo=FALSE}
+set.seed(2550)
+n=600
+p=0.4
+curve(dnorm(x,p,sqrt(p*(1-p)/n)),0.32,0.48, lwd=2,
+      xlab='',ylab='', axes=F)
+axis(1, lwd=2)
+abline(v=p, lwd=2, lty=2, col='red')
+rect(0.37,0,0.45,dnorm(0.40,0.40,sqrt(p*(1-p)/n)))
+B=50000
+xp<-runif(B,0.37,0.45)
+yp<-runif(B,0,dnorm(0.40,0.40,sqrt(p*(1-p)/n)))
+
+ca<-ifelse(yp<=dnorm(xp,0.40,sqrt(p*(1-p)/n)),'red','black')
+
+points(xp,yp,col=ca,pch=c(19,19))
+
+(table(ca)[2]/B)*(0.45-0.37)*dnorm(0.40,0.40,sqrt(p*(1-p)/n))
+
+```
+
+
+
+
+

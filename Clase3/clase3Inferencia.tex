@@ -1,0 +1,223 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Marburg}
+\usefonttheme{structurebold}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Estadística Inferencial},
+  pdfauthor={Jackson M'coy Romero Plasencia},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{ragged2e}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{multicol}
+\AtBeginSubsection{}
+
+\title{Estadística Inferencial}
+\author{Jackson M'coy Romero Plasencia}
+\date{Ayacucho 2020}
+\institute{\large Universidad Nacional de San Cristóbal de Huamanga \and \normalsize Departamento Académico de Matemática y Física}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}
+  \tableofcontents[hideallsubsections]
+\end{frame}
+\hypertarget{ejercicio-1}{%
+\subsection{Ejercicio 1}\label{ejercicio-1}}
+
+\begin{frame}{Ejercicio 1}
+
+\justifying   La distribución de las notas del examen final de Mat. I
+resultó ser normal \(N(\mu,\sigma^2)\), con cuartiles 1 y 3 iguales a
+6.99 y 11.01 respectivamente.
+
+\begin{itemize}\justifying 
+  \item [a.] Determine la media y la varianza de la distribución de las notas.
+  \item [b.] Halle el intervalo $[a,b] $ centrado en $\mu$ tal que $P( a\leq\overline{X} \leq b)=0.9544$, donde $\overline{X}$ es la media de la muestra $X_1,X_2,X_3, X_4$ escogida de esa población 
+\end{itemize}
+
+\end{frame}
+
+\hypertarget{ejercicio-2}{%
+\subsection{Ejercicio 2}\label{ejercicio-2}}
+
+\begin{frame}{Ejercicio 2}
+
+\justifying Un proceso automático llena bolsas de café cuyo peso neto
+tiene una media de 250 gramos y un desviación estándar de 3 gramos. Para
+controlar el proceso, cada hora se pesan 36 bolsas escogidas al azar; si
+el peso neto medio está entre 249 y 251 gramos se continúa con el
+proceso aceptando que el peso neto medio es 250 gramos y en caso
+contrario, se detiene el proceso para reajustar la máquina.
+
+\begin{itemize}\justifying 
+  \item [a.] ¿Cuál es la probabilidad de detener el proceso cuando el peso neto medio realmente es 250 ?
+  \item [b.] ¿Cuál es la probabilidad de aceptar que el peso neto promedio es 250 cuando realmente es de 248 gramos ? 
+\end{itemize}
+
+\end{frame}
+
+\hypertarget{ejercicio-3}{%
+\subsection{Ejercicio 3}\label{ejercicio-3}}
+
+\begin{frame}{Ejercicio 3}
+
+La duración en horas de una marca de tarjeta electrónica se distribuye
+exponencialmente con promedio de 1000 horas.
+
+\begin{itemize}\justifying 
+  \item [a.] Halle el tamaño $n$ de la muestra de manera que sea 0.9544 la probabilidad de que su media muestral esté entre 800 y 1200 horas.
+  \item [b.] Si se obtiene una muestra aleatoria de 100 de esas tarjetas calcular la proabilidad que la duración media de la muestra sea superior a 1100 horas.
+\end{itemize}
+
+\end{frame}
+
+\hypertarget{distribuciuxf3n-exponencial}{%
+\subsection{Distribución
+Exponencial}\label{distribuciuxf3n-exponencial}}
+
+\begin{frame}{Distribución Exponencial}
+
+\[f_X(x,\lambda)=f_X(x)= \frac{\displaystyle e^{\,-x/\lambda} }{\lambda} \quad x\geq0\]
+Hallando el \(\mathbb{E}(X)\) y \(\mathbb{V}(X)\). Para trabajar con
+integrales, definidas en \(x\geq 0\), vamos a utilizar la functión gamma
+\[ \Gamma(\alpha)=\displaystyle\int_{0}^{\infty}\, y^{\alpha-1}\,\displaystyle e^{-y}\,dy =(\alpha-1)!\]
+
+\[\mathbb{E}(X)  = \displaystyle\int_{0}^{\infty}x\, \frac{\displaystyle e^{\,-x/\lambda} }{\lambda}\,dx  = \displaystyle\int_{0}^{\infty} \bigg(\frac{x}{\lambda}\bigg) \, \displaystyle e^{\,-(x /\lambda)} \,dx\]
+
+\[\mathbb{E}(X)  = \displaystyle\int_{0}^{\infty}x\, \frac{\displaystyle e^{\,-x/\lambda} }{\lambda}\,dx =\lambda\displaystyle\int_{0}^{\infty} \bigg(\frac{x}{\lambda}\bigg)^{\color{red}2-1 } \, \displaystyle e^{\,-(x /\lambda)} \,d(x/\lambda)\]
+
+\[\mathbb{E}(X)  =\lambda\Gamma(2)=\lambda(2-1)!=\lambda \]
+
+\end{frame}
+
+\hypertarget{section}{%
+\subsection{}\label{section}}
+
+\begin{frame}{}
+
+\[\mathbb{E}(X^2)  = \displaystyle\int_{0}^{\infty}x^2\, \frac{\displaystyle e^{\,-x^/\lambda} }{\lambda}\,dx  = \displaystyle\int_{0}^{\infty} \bigg(\frac{x^2}{\lambda}\bigg) \, \displaystyle e^{\,-(x /\lambda)} \,dx\]
+
+\[\mathbb{E}(X^2)  = \displaystyle\int_{0}^{\infty}x\, \frac{\displaystyle e^{\,-x/\lambda} }{\lambda}\,dx =\lambda^2\displaystyle\int_{0}^{\infty} \bigg(\frac{x}{\lambda}\bigg)^{\color{red}3-1 } \, \displaystyle e^{\,-(x /\lambda)} \,d(x/\lambda)\]
+
+\[\mathbb{E}(X^2)  =\lambda^2\Gamma(3)=\lambda(3-1)!=2\lambda^2 \]
+\[\mathbb{V}(X)=\mathbb{E}(X^2)-(\mathbb{E}(X))^2 =2\lambda^2- \lambda^2=\lambda^2\]
+
+\end{frame}
+
+\hypertarget{soluciuxf3n}{%
+\subsection{Solución}\label{soluciuxf3n}}
+
+\begin{frame}{Solución}
+
+Ejercicio 1.
+
+\end{frame}
+
+\hypertarget{ejercicio-2-1}{%
+\subsection{Ejercicio 2}\label{ejercicio-2-1}}
+
+\begin{frame}{Ejercicio 2}
+
+\begin{enumerate}
+[a.]
+\item
+  \justifying
+
+  \[P(\overline{X}<249|\mu=250)=P\Bigg(\frac{\overline{X}-\mu}{\sigma/\sqrt{n}} <\frac{ 249-250}{3/6}\Bigg) \]
+  \[P(\overline{X}<249|\mu=250)=P(Z<-2)=0.02275\]
+\end{enumerate}
+
+Probabilidad de detener el proceso es:2(0.02275)= 0.04550026
+
+b.\justifying 
+\[P(\overline{X}>249|\mu=248)=P\Bigg(\frac{\overline{X}-\mu}{\sigma/\sqrt{n}} >\frac{ 249-248}{3/6}\Bigg) \]
+\[P(\overline{X}>249|\mu=248)=P(Z>2)=P(Z<-2)=0.02275\]
+
+Probabilidad de detener el proceso es:0.02275
+
+\end{frame}
+
+\end{document}
